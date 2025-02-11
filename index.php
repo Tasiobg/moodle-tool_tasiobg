@@ -15,15 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * English language pack for tool_tasiobg
+ * TODO describe file index
  *
  * @package    tool_tasiobg
- * @category   string
- * @copyright  2025 YOUR NAME <your@email.com>
+ * @copyright  2025 Tasio Bertomeu Gomez <tasio.bertomeu@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+require_once('../../../config.php');
 
-$string['helloworld'] = 'Hello World';
-$string['pluginname'] = 'My first Moodle plugin';
+require_login();
+
+$url = new moodle_url('/admin/tool/tasiobg/index.php', []);
+$PAGE->set_url($url);
+$PAGE->set_context(context_system::instance());
+$PAGE->set_title('Hello to the todo list');
+
+$PAGE->set_heading(get_string('pluginname', 'tool_tasiobg'));
+echo get_string('helloworld', 'tool_tasiobg');
