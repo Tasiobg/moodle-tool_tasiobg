@@ -23,13 +23,24 @@
  */
 
 require_once('../../../config.php');
+require_once($CFG->libdir.'/adminlib.php');
 
 require_login();
 
+$title = get_string('pluginname', 'tool_tasiobg');
 $url = new moodle_url('/admin/tool/tasiobg/index.php', []);
 $PAGE->set_url($url);
 $PAGE->set_context(context_system::instance());
-$PAGE->set_title('Hello to the todo list');
+$PAGE->set_title($title);
+$PAGE->set_heading($title);
 
-$PAGE->set_heading(get_string('pluginname', 'tool_tasiobg'));
-echo get_string('helloworld', 'tool_tasiobg');
+echo $OUTPUT->header();
+echo $OUTPUT->heading($title);
+
+echo html_writer::div(get_string('helloworld', 'tool_tasiobg'));
+
+$id = optional_param('id', null, PARAM_TEXT);
+
+echo html_writer::div(get_string('courseid', 'tool_tasiobg', $id));
+
+echo $OUTPUT->footer();
