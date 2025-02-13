@@ -34,13 +34,24 @@ $PAGE->set_context(context_system::instance());
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 
+$id = required_param('id', type: PARAM_TEXT);
+
+// Extending the navigation.
+$previewnode = $PAGE->navigation->add(
+    'testNav1',
+    new moodle_url('/admin/tool/tasiobg/index.php', ['id' => $id]),
+    navigation_node::TYPE_CONTAINER
+);
+$thingnode = $previewnode->add(
+    'testNav2',
+    new moodle_url('/admin/tool/tasiobg/index.php', ['id' => 'fakeid'])
+);
+$thingnode->make_active();
+
 echo $OUTPUT->header();
 echo $OUTPUT->heading($title);
 
 echo html_writer::div(get_string('helloworld', 'tool_tasiobg'));
-
-$id = optional_param('id', null, PARAM_TEXT);
-
 echo html_writer::div(get_string('courseid', 'tool_tasiobg', $id));
 
 echo $OUTPUT->footer();
