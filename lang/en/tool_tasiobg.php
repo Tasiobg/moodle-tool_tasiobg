@@ -26,5 +26,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['courseid'] = 'Course id: {$a}';
+$string['firstname'] = 'First name';
 $string['helloworld'] = 'Hello World';
+$string['lastaccesseduserslist'] = 'Last accessed users list';
+$string['numofregusers'] = 'Number of registered users: <b>{$a}</b>';
 $string['pluginname'] = 'My first Moodle plugin';
+$string['timeaccess'] = 'Time Access';
+$string['userid'] = 'User ID';

@@ -54,4 +54,40 @@ echo $OUTPUT->heading($title);
 echo html_writer::div(get_string('helloworld', 'tool_tasiobg'));
 echo html_writer::div(get_string('courseid', 'tool_tasiobg', $id));
 
+$numofusers = $DB->count_records('user', ['confirmed' => 1]);
+echo html_writer::div(get_string('numofregusers', 'tool_tasiobg', $numofusers));
+
+$user = $DB->get_records_sql(
+    "SELECT ul.userid, u.firstname, ul.timeaccess
+            FROM {user_lastaccess} ul
+            INNER JOIN {user} u ON ul.userid = u.id
+            LIMIT 10");
+
+if (!empty($user)) {
+    echo html_writer::div('----');
+    echo html_writer::div(get_string('lastaccesseduserslist', 'tool_tasiobg'));
+    // Print table.
+    echo '
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">'.get_string('userid', 'tool_tasiobg').'</th>
+                <th scope="col">'.get_string('firstname', 'tool_tasiobg').'</th>
+                <th scope="col">'.get_string('timeaccess', 'tool_tasiobg').'</th>
+            </tr>
+        </thead>';
+
+    foreach ($user as $u) {
+        echo "
+            <tbody>
+                <tr>
+                    <th>$u->userid</th>
+                    <td>$u->firstname</td>
+                    <td>$u->timeaccess</td>
+                </tr>
+            </tbody>";
+    }
+    echo '</table>';
+}
+
 echo $OUTPUT->footer();
