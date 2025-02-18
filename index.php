@@ -34,7 +34,7 @@ $PAGE->set_context(context_system::instance());
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 
-$id = required_param('id', type: PARAM_TEXT);
+$id = required_param('id', type: PARAM_INT);
 
 // Extending the navigation.
 $previewnode = $PAGE->navigation->add(
@@ -82,12 +82,17 @@ if (!empty($user)) {
             <tbody>
                 <tr>
                     <th>$u->userid</th>
-                    <td>$u->firstname</td>
-                    <td>$u->timeaccess</td>
+                    <td>".format_text($u->firstname, FORMAT_PLAIN)."</td>
+                    <td>".userdate($u->timeaccess, get_string('strftimedatetime', 'core_langconfig'));".</td>
                 </tr>
             </tbody>";
     }
     echo '</table>';
 }
+
+// Practice assignment "Use class table_sql".
+echo html_writer::div('----table_sql----');
+$table = new \tool_tasiobg\tableclass($url, $id);
+$table->out(50, false);
 
 echo $OUTPUT->footer();
