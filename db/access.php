@@ -15,17 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version info
+ * Capability definitions for My first Moodle plugin
+ *
+ * Documentation: {@link https://moodledev.io/docs/apis/subsystems/access}
  *
  * @package    tool_tasiobg
+ * @category   access
  * @copyright  2025 Tasio Bertomeu Gomez <tasio.bertomeu@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025021009;
-$plugin->requires  = 2024100701.09;
-$plugin->component = 'tool_tasiobg'; // Full name of the plugin (used for diagnostics).
-$plugin->maturity = MATURITY_ALPHA; // The plugin is a pre-release version.
-$plugin->release = '1.6';
+$capabilities = [
+    'tool/tasiobg:view' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
+    ],
+    'tool/tasiobg:edit' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+    ],
+];

@@ -30,9 +30,11 @@ require_login();
 $title = get_string('pluginname', 'tool_tasiobg');
 $url = new moodle_url('/admin/tool/tasiobg/index.php', []);
 $PAGE->set_url($url);
-$PAGE->set_context(context_system::instance());
+$PAGE->set_context(\context_system::instance());
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
+
+require_capability('tool/tasiobg:view', $PAGE->context);
 
 $id = required_param('id', type: PARAM_INT);
 
@@ -94,5 +96,12 @@ if (!empty($user)) {
 echo html_writer::div('----table_sql----');
 $table = new \tool_tasiobg\tableclass($url, $id);
 $table->out(50, false);
+
+if (has_capability('tool/tasiobg:view', $PAGE->context)) {
+    echo html_writer::div('You have view capability');
+}
+if (has_capability('tool/tasiobg:edit', $PAGE->context)) {
+    echo html_writer::div('You have edit capability');
+}
 
 echo $OUTPUT->footer();

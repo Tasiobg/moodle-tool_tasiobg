@@ -38,5 +38,7 @@ $string['tablename'] = 'Name';
 $string['tablepriority'] = 'Priority';
 $string['tabletimecreated'] = 'Time Created';
 $string['tabletimemodified'] = 'Time Modified';
+$string['tasiobg:edit'] = 'Edit tasiobg content';
+$string['tasiobg:view'] = 'View tasiobg content';
 $string['timeaccess'] = 'Time Access';
 $string['userid'] = 'User ID';
