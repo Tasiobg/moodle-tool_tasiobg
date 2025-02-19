@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * TODO describe file index
+ * Index page for the tool_tasiobg plugin.
  *
  * @package    tool_tasiobg
  * @copyright  2025 Tasio Bertomeu Gomez <tasio.bertomeu@moodle.com>
@@ -36,9 +36,9 @@ $PAGE->set_heading($title);
 
 require_capability('tool/tasiobg:view', $PAGE->context);
 
-$id = required_param('id', type: PARAM_INT);
+$id = required_param('id', PARAM_INT);
 
-// Extending the navigation.
+// Extend the navigation.
 $previewnode = $PAGE->navigation->add(
     'testNav1',
     new moodle_url('/admin/tool/tasiobg/index.php', ['id' => $id]),
@@ -59,13 +59,13 @@ echo html_writer::div(get_string('courseid', 'tool_tasiobg', $id));
 $numofusers = $DB->count_records('user', ['confirmed' => 1]);
 echo html_writer::div(get_string('numofregusers', 'tool_tasiobg', $numofusers));
 
-$user = $DB->get_records_sql(
+$users = $DB->get_records_sql(
     "SELECT ul.userid, u.firstname, ul.timeaccess
             FROM {user_lastaccess} ul
             INNER JOIN {user} u ON ul.userid = u.id
             LIMIT 10");
 
-if (!empty($user)) {
+if (!empty($users)) {
     echo html_writer::div('----');
     echo html_writer::div(get_string('lastaccesseduserslist', 'tool_tasiobg'));
     // Print table.
@@ -79,7 +79,7 @@ if (!empty($user)) {
             </tr>
         </thead>';
 
-    foreach ($user as $u) {
+    foreach ($users as $u) {
         echo "
             <tbody>
                 <tr>
