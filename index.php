@@ -102,6 +102,8 @@ if (has_capability('tool/tasiobg:view', $PAGE->context)) {
 }
 if (has_capability('tool/tasiobg:edit', $PAGE->context)) {
     echo html_writer::div('You have edit capability');
+    $urledit = new moodle_url('/admin/tool/tasiobg/edit.php', ['courseid' => $id]);
+    echo html_writer::div(content: '<a href="'.$urledit.'">'.get_string('addnewrow', 'tool_tasiobg').'</a>');
 }
 
 echo $OUTPUT->footer();

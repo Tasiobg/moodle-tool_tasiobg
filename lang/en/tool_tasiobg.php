@@ -25,11 +25,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['addnewrow'] = 'Add new row';
 $string['courseid'] = 'Course id: {$a}';
 $string['firstname'] = 'First name';
 $string['helloworld'] = 'Hello World';
 $string['lastaccesseduserslist'] = 'Last accessed users list';
+$string['namealreadyexist'] = 'The name already exist, the name must be unique';
 $string['numofregusers'] = 'Number of registered users: <b>{$a}</b>';
+$string['pleaseentername'] = 'Pleasse enter a name';
 $string['pluginname'] = 'My first Moodle plugin';
 $string['tablecompleted'] = 'Completed';
 $string['tablecourseid'] = 'Course ID';
