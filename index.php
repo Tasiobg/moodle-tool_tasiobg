@@ -106,4 +106,17 @@ if (has_capability('tool/tasiobg:edit', $PAGE->context)) {
     echo html_writer::div(content: '<a href="'.$urledit.'">'.get_string('addnewrow', 'tool_tasiobg').'</a>');
 }
 
+// Test HTML injection.
+echo html_writer::div("-----");
+$url = new moodle_url('/admin/tool/tasiobg/index.php', ['id' => $id]);
+echo "<a href=\"".$url."\" title=\"".
+get_string('testxxs', 'tool_tasiobg',
+format_string('a" onmouseover="alert(\'XSS\')" asdf="')).
+"\">Testing XXS injection</a>";
+
+echo html_writer::div("");
+echo html_writer::link($url, 'Testing XXS injection fix',
+    ['title' => get_string('testxxs', 'tool_tasiobg',
+    format_string('a" onmouseover="alert(\'XSS\')" asdf="'))]);
+
 echo $OUTPUT->footer();

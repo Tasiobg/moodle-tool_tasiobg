@@ -43,5 +43,6 @@ $string['tabletimecreated'] = 'Time Created';
 $string['tabletimemodified'] = 'Time Modified';
 $string['tasiobg:edit'] = 'Edit tasiobg content';
 $string['tasiobg:view'] = 'View tasiobg content';
+$string['testxxs'] = 'test XXS {$a}';
 $string['timeaccess'] = 'Time Access';
 $string['userid'] = 'User ID';

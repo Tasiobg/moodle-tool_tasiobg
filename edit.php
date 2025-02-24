@@ -33,6 +33,14 @@ require_capability('tool/tasiobg:edit', $PAGE->context);
 
 $courseid = optional_param('courseid', 0, PARAM_INT);
 $entryid = optional_param('entryid', 0, PARAM_INT);
+$delete = optional_param('delete', 0, PARAM_INT);
+
+if ($delete > 0) {
+    require_sesskey();
+    $course = $DB->get_record('tool_tasiobg', ['id' => $delete], '*', MUST_EXIST);
+    $DB->delete_records('tool_tasiobg', ['id' => $delete]);
+    redirect(new moodle_url('/admin/tool/tasiobg/index.php', ['id' => $course->courseid]));
+}
 
 // Instantiate the myform form from within the plugin.
 $mform = new \tool_tasiobg\form\tool_tasiobg_form(null, ['courseid' => $courseid, 'entryid' => $entryid]);
