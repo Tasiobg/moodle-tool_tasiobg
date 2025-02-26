@@ -7,7 +7,7 @@ Feature: Add a row to the table
   Background:
     Given I log in as "admin"
 
-   Scenario: I see the Add new row link
+  Scenario: I see the Add new row link
     When I visit "/admin/tool/tasiobg/index.php?id=1"
     And I click on "Add new row" "link"
     And I click on "Submit" "button"
