@@ -34,6 +34,13 @@ require_capability('tool/tasiobg:edit', $PAGE->context);
 $courseid = optional_param('courseid', 0, PARAM_INT);
 $entryid = optional_param('entryid', 0, PARAM_INT);
 $delete = optional_param('delete', 0, PARAM_INT);
+$textfieldoptions = [
+    'trusttext' => true,
+    'subdirs' => true,
+    'maxfiles' => 99,
+    'maxbytes' => get_config('moodlecourse', 'maxbytes'),
+    'context' => $PAGE->context,
+];
 
 if ($delete > 0) {
     require_sesskey();
@@ -56,10 +63,13 @@ if ($mform->is_cancelled()) {
 
     if ($fromform->entryid > 0) {
         $course = $DB->get_record('tool_tasiobg', ['id' => $fromform->entryid], '*', MUST_EXIST);
-        $mform->set_data($course);
         $course->name = trim($fromform->name);
         $course->completed = (property_exists($fromform, 'completed') && $fromform->completed === '1') ? 1 : 0;
         $course->timemodified = time();
+        $course->description_editor = $fromform->description_editor;
+        $course = file_postupdate_standard_editor(
+            $course, 'description', $textfieldoptions, $PAGE->context, 'tool_tasiobg', 'tool_tasiobg',
+            $course->id);
         $DB->update_record('tool_tasiobg', $course);
         $courseid = $course->courseid;
     } else if ($fromform->courseid > 0) {
@@ -69,7 +79,12 @@ if ($mform->is_cancelled()) {
         $newrow->completed = (property_exists($fromform, 'completed') && $fromform->completed === '1') ? 1 : 0;
         $newrow->timecreated = time();
         $newrow->timemodified = $newrow->timecreated;
-        $DB->insert_record('tool_tasiobg', $newrow);
+        $newrow->id = $DB->insert_record('tool_tasiobg', $newrow);
+        $newrow->description_editor = $fromform->description_editor;
+        $newrow = file_postupdate_standard_editor(
+            $newrow, 'description', $textfieldoptions, $PAGE->context, 'tool_tasiobg', 'tool_tasiobg',
+            $newrow->id);
+        $DB->update_record('tool_tasiobg', $newrow);
     }
     redirect(new moodle_url('/admin/tool/tasiobg/index.php', ['id' => $courseid]));
 }
@@ -81,6 +96,9 @@ echo $OUTPUT->header();
 if (!isset($fromform) || !property_exists($fromform, 'entryid') || $fromform->entryid == 0) {
     if ($entryid > 0) {
         $course = $DB->get_record('tool_tasiobg', ['id' => $entryid], '*', MUST_EXIST);
+        $course = file_prepare_standard_editor(
+            $course, 'description', $textfieldoptions, $PAGE->context, 'tool_tasiobg', 'tool_tasiobg', $course->id
+        );
         $mform->set_data($course);
     }
 }

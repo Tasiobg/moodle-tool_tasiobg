@@ -78,5 +78,27 @@ function xmldb_tool_tasiobg_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025021007, 'tool', 'tasiobg');
     }
 
+    if ($oldversion < 2025021015) {
+
+        // Define field description to be added to tool_tasiobg.
+        $table = new xmldb_table('tool_tasiobg');
+        $field1 = new xmldb_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null, 'priority');
+
+        // Conditionally launch add field description.
+        if (!$dbman->field_exists($table, $field1)) {
+            $dbman->add_field($table, $field1);
+        }
+
+        $field2 = new xmldb_field('descriptionformat', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'description');
+
+        // Conditionally launch add field descriptionformat.
+        if (!$dbman->field_exists($table, $field2)) {
+            $dbman->add_field($table, $field2);
+        }
+
+        // Tasiobg savepoint reached.
+        upgrade_plugin_savepoint(true, 2025021015, 'tool', 'tasiobg');
+    }
+
     return true;
 }

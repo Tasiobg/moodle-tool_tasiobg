@@ -4,6 +4,9 @@ Sample plug-in created following Moodle dev course https://moodle.academy/course
 
 Changelog
 ---------------
+### v2.1
+Practice assignment https://moodle.academy/mod/page/view.php?id=2522
+
 ### v2.0
 Practice assignment https://moodle.academy/mod/page/view.php?id=2407
 

@@ -46,6 +46,14 @@ class tool_tasiobg_form extends moodleform {
         $mform->setType('name', PARAM_NOTAGS);
         $mform->setDefault('name', get_string('pleaseentername', 'tool_tasiobg'));
         $mform->addElement('checkbox', 'completed', get_string('completed'));
+        $mform->addElement('editor', 'description_editor', get_string('content'), null, [
+            'trusttext' => true,
+            'subdirs' => true,
+            'maxfiles' => 99,
+            'maxbytes' => get_config('moodlecourse', 'maxbytes'),
+            'context' => \context_system::instance(),
+        ]);
+        $mform->setType('description_editor', PARAM_RAW);
         $mform->addElement('submit', null, get_string('submit'));
         $mform->addElement('cancel', null, get_string('back'));
     }
