@@ -119,4 +119,9 @@ echo html_writer::link($url, 'Testing XXS injection fix',
     ['title' => get_string('testxxs', 'tool_tasiobg',
     format_string('a" onmouseover="alert(\'XSS\')" asdf="'))]);
 
+/** @var \tool_tasiobg\output\renderer $renderer */
+$renderer = $PAGE->get_renderer('tool_tasiobg');
+echo $renderer->render_hello_world();
+echo $OUTPUT->render_from_template('tool_tasiobg/renderer', ['testvar' => 'testvalue']);
+
 echo $OUTPUT->footer();

@@ -14,18 +14,34 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace tool_tasiobg\output;
+
 /**
- * Plugin version info
+ * Renderer for My first Moodle plugin
  *
  * @package    tool_tasiobg
  * @copyright  2025 Tasio Bertomeu Gomez <tasio.bertomeu@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class renderer extends \plugin_renderer_base implements \renderable, \templatable {
+    /**
+     * Renders the "Hello, World!" message.
+     *
+     * @return string The rendered "Hello, World!" message.
+     */
+    public function render_hello_world(): string {
+        return \html_writer::div(get_string('helloworld', 'tool_tasiobg'));
+    }
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2025021016;
-$plugin->requires  = 2024100701.09;
-$plugin->component = 'tool_tasiobg'; // Full name of the plugin (used for diagnostics).
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.2';
+    /**
+     * Exports data for use in a mustache template.
+     *
+     * @param \renderer_base $output The renderer base instance.
+     * @return \stdClass Data to be used in the template.
+     */
+    public function export_for_template(\renderer_base $output) {
+        $data = new \stdClass();
+        $data->helloworld = get_string('helloworld', 'tool_tasiobg');
+        return $data;
+    }
+}
