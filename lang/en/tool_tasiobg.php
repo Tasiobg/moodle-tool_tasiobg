@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['addnewrow'] = 'Add new row';
 $string['courseid'] = 'Course id: {$a}';
+$string['deletemodalconfirmation'] = 'Are you sure you want to delete this item? These changes cannot be reverted.';
 $string['firstname'] = 'First name';
 $string['helloworld'] = 'Hello World';
 $string['lastaccesseduserslist'] = 'Last accessed users list';

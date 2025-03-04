@@ -45,6 +45,7 @@ class tableclass extends \table_sql {
         global $CFG, $DB;
         parent::__construct('tool_tasiobg_table');
         $this->courseid = $courseid;
+        $this->set_attribute('id', 'tasiobg-course-list-table');
 
         $this->define_columns(['id', 'courseid', 'name', 'completed', 'priority', 'timecreated', 'timemodified', 'edit']);
         $this->define_headers([
@@ -83,7 +84,7 @@ class tableclass extends \table_sql {
             $urldelete = new moodle_url('/admin/tool/tasiobg/edit.php', ['delete' => $course->id, 'sesskey' => sesskey()]);
             $course->edit = '<a title="' . get_string('edit') . '" href="'. $urledit . '">' .
                 $OUTPUT->pix_icon('t/' . 'edit', alt: get_string('edit')) . '</a>
-                <a title="' . get_string('delete') . '" href="'. $urldelete . '">' .
+                <a class="deletelink" title="' . get_string('delete') . '" href="'. $urldelete . '">' .
                 $OUTPUT->pix_icon('t/' . 'delete', get_string('delete')) . '</a>';
             $this->rawdata[] = $course;
         }
