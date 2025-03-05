@@ -14,18 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace tool_tasiobg;
+
 /**
- * Plugin version info
+ * Class observer
  *
  * @package    tool_tasiobg
  * @copyright  2025 Tasio Bertomeu Gomez <tasio.bertomeu@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class courseobserver {
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2025021022;
-$plugin->requires  = 2024100701.09;
-$plugin->component = 'tool_tasiobg'; // Full name of the plugin (used for diagnostics).
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.4';
+    /**
+     * Course created observer
+     *
+     * @param \tool_tasiobg\event\course_added $event
+     */
+    public static function course_added(\tool_tasiobg\event\course_added $event) {
+        return;
+    }
+}

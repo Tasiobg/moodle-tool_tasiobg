@@ -15,17 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version info
+ * Event observers for My first Moodle plugin
  *
  * @package    tool_tasiobg
+ * @category   event
  * @copyright  2025 Tasio Bertomeu Gomez <tasio.bertomeu@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025021022;
-$plugin->requires  = 2024100701.09;
-$plugin->component = 'tool_tasiobg'; // Full name of the plugin (used for diagnostics).
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.4';
+$observers = [
+    [
+        'eventname'   => '\tool_tasiobg\event\course_added',
+        'callback'    => '\tool_tasiobg\courseobserver::course_added',
+    ],
+];

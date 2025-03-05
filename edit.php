@@ -81,10 +81,17 @@ if ($mform->is_cancelled()) {
         $newrow->timemodified = $newrow->timecreated;
         $newrow->id = $DB->insert_record('tool_tasiobg', $newrow);
         $newrow->description_editor = $fromform->description_editor;
+        $newrow->priority = 1;
         $newrow = file_postupdate_standard_editor(
             $newrow, 'description', $textfieldoptions, $PAGE->context, 'tool_tasiobg', 'tool_tasiobg',
             $newrow->id);
         $DB->update_record('tool_tasiobg', $newrow);
+        $event = \tool_tasiobg\event\course_added::create([
+            'context' => $PAGE->context,
+            'objectid' => $newrow->id,
+        ]);
+        $event->add_record_snapshot('tool_tasiobg', $newrow);
+        $event->trigger();
     }
     redirect(new moodle_url('/admin/tool/tasiobg/index.php', ['id' => $courseid]));
 }

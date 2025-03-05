@@ -14,18 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace tool_tasiobg\event;
+
 /**
- * Plugin version info
+ * Event course_added
  *
  * @package    tool_tasiobg
  * @copyright  2025 Tasio Bertomeu Gomez <tasio.bertomeu@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class course_added extends \core\event\base {
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2025021022;
-$plugin->requires  = 2024100701.09;
-$plugin->component = 'tool_tasiobg'; // Full name of the plugin (used for diagnostics).
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.4';
+    /**
+     * Set basic properties for the event.
+     */
+    protected function init() {
+        $this->data['objecttable'] = 'course';
+        $this->data['crud'] = 'c';
+        $this->data['edulevel'] = self::LEVEL_OTHER;
+    }
+}
