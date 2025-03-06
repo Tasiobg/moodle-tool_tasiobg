@@ -86,7 +86,8 @@ class tableclass extends \table_sql {
             $urldelete = new moodle_url('/admin/tool/tasiobg/edit.php', ['delete' => $course->id, 'sesskey' => sesskey()]);
             $course->edit = '<a title="' . get_string('edit') . '" href="'. $urledit . '">' .
                 $OUTPUT->pix_icon('t/' . 'edit', alt: get_string('edit')) . '</a>
-                <a class="deletelink" data-courseid="'. $course->id . '" title="' . get_string('delete') . '" href="'. $urldelete . '">' .
+                <a class="deletelink" data-courseid="'. $course->id . '" title="' . get_string('delete')
+                . '" href="'. $urldelete . '">' .
                 $OUTPUT->pix_icon('t/' . 'delete', get_string('delete')) . '</a>';
             $this->rawdata[] = $course;
         }
