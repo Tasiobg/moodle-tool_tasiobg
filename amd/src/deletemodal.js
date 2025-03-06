@@ -21,6 +21,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+import {deleteCourseAndLoadPage} from './repository';
 import ModalSaveCancel from 'core/modal_save_cancel';
 import ModalEvents from 'core/modal_events';
 import {get_string as getString} from 'core/str';
@@ -47,7 +48,7 @@ export const init = async() => {
                     }
                 });
                 modal.getRoot().on(ModalEvents.save, () => {
-                    location.href = deletelink.getAttribute('href');
+                    deleteCourseAndLoadPage(deletelink.getAttribute('data-courseid'));
                 });
             });
         });

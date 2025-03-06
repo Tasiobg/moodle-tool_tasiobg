@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025021022;
+$plugin->version   = 2025021024;
 $plugin->requires  = 2024100701.09;
 $plugin->component = 'tool_tasiobg'; // Full name of the plugin (used for diagnostics).
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.4';
+$plugin->release = '2.5';

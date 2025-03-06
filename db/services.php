@@ -14,36 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-declare(strict_types=1);
-
-namespace tool_tasiobg\output;
-
 /**
- * Renderer for My first Moodle plugin
+ * External functions and service declaration for My first Moodle plugin
+ *
+ * Documentation: {@link https://moodledev.io/docs/apis/subsystems/external/description}
  *
  * @package    tool_tasiobg
+ * @category   webservice
  * @copyright  2025 Tasio Bertomeu Gomez <tasio.bertomeu@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class renderer extends \plugin_renderer_base implements \renderable, \templatable {
-    /**
-     * Renders the "Hello, World!" message.
-     *
-     * @return string The rendered "Hello, World!" message.
-     */
-    public function render_hello_world(): string {
-        return \html_writer::div(get_string('helloworld', 'tool_tasiobg'));
-    }
 
-    /**
-     * Exports data for use in a mustache template.
-     *
-     * @param \renderer_base $output The renderer base instance.
-     * @return \stdClass Data to be used in the template.
-     */
-    public function export_for_template(\renderer_base $output) {
-        $data = new \stdClass();
-        $data->helloworld = get_string('helloworld', 'tool_tasiobg');
-        return $data;
-    }
-}
+defined('MOODLE_INTERNAL') || die();
+
+$functions = [
+    'tool_tasiobg_delete_courses' => [
+        'classname' => tool_tasiobg\external\delete_courses::class,
+        'description' => 'Delete courses',
+        'type' => 'write',
+        'ajax' => true,
+        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+    ],
+];

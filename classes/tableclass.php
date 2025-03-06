@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+declare(strict_types=1);
+
 namespace tool_tasiobg;
 
 use moodle_url;
@@ -84,7 +86,7 @@ class tableclass extends \table_sql {
             $urldelete = new moodle_url('/admin/tool/tasiobg/edit.php', ['delete' => $course->id, 'sesskey' => sesskey()]);
             $course->edit = '<a title="' . get_string('edit') . '" href="'. $urledit . '">' .
                 $OUTPUT->pix_icon('t/' . 'edit', alt: get_string('edit')) . '</a>
-                <a class="deletelink" title="' . get_string('delete') . '" href="'. $urldelete . '">' .
+                <a class="deletelink" data-courseid="'. $course->id . '" title="' . get_string('delete') . '" href="'. $urldelete . '">' .
                 $OUTPUT->pix_icon('t/' . 'delete', get_string('delete')) . '</a>';
             $this->rawdata[] = $course;
         }
