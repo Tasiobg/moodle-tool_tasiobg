@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+declare(strict_types=1);
+
 require_once('../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 
@@ -123,5 +125,4 @@ echo html_writer::link($url, 'Testing XXS injection fix',
 $renderer = $PAGE->get_renderer('tool_tasiobg');
 echo $renderer->render_hello_world();
 echo $OUTPUT->render_from_template('tool_tasiobg/renderer', ['testvar' => 'testvalue']);
-
 echo $OUTPUT->footer();
